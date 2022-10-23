@@ -1,35 +1,29 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-{% if mintable %} 
+import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-    {% if mintable.auto_increment_id %} 
-import "@openzeppelin/contracts/utils/Counters.sol";
-    {% endif %}
-{% endif %}
 
-contract MyToken is ERC721,{% if mintable %} Ownable {% endif %}{
-    {% if mintable.auto_increment_id %} 
-    using Counters for Counters.Counter;
+contract {{contract_name}} is ERC721A, Ownable {
+    string private _baseTokenURI;
 
-    Counters.Counter private _tokenIdCounter;
-    {% endif %}
-
-    constructor() ERC721("{{ token_name }}", "{{ token_symbol }}") {}
-    
-{% if mintable %}
-    {% if mintable.is_mintable and mintable.auto_increment_id %}
-    function safeMint(address to) public onlyOwner {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        string memory _baseuri
+    ) ERC721A(_name, _symbol) {
+        _baseTokenURI = _baseuri;
     }
-    {% else %}
-    function safeMint(address to, uint256 tokenId) public onlyOwner {
-        _safeMint(to, tokenId);
-    }
-    {% endif %}
 
-{% endif %}
+    function _baseURI() internal view virtual override returns (string memory) {
+        return _baseTokenURI;
+    }
+
+    function setBaseURI(string memory _baseuri) public onlyOwner {
+        _baseTokenURI = _baseuri;
+    }
+
+    function safeMint(uint256 quantity) external payable {
+        _safeMint(msg.sender, quantity);
+    }
 }

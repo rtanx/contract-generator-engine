@@ -125,4 +125,11 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+#IDEA
 .idea/
+.vscode
+
+notes.md
+
+#node
+node_modules

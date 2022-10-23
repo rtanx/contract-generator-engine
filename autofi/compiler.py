@@ -3,7 +3,7 @@ from pathlib import Path
 from semantic_version import Version
 import solcx
 
-from autofi.Contract import Contract
+from autofi.contract import Contract
 
 
 class Compiler:

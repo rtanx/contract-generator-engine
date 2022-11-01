@@ -2,7 +2,7 @@ from fastapi import APIRouter, BackgroundTasks, Body, Depends, status
 
 from api.services.contract import ContractService
 
-from .models import ContractConstructor
+from api.models import ContractConstructor
 
 router = APIRouter()
 
@@ -15,10 +15,7 @@ async def scaffold_contract(constructor_args: ContractConstructor, bg_task: Back
     return {
         'success': True,
         'message': 'contract creation is in progress',
-        'tx_hash': tx,
+        'data': {
+            'tx_hash': tx,
+        }
     }
-
-
-@router.get('/status', status_code=200)
-def contract_status():
-    pass

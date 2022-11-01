@@ -11,7 +11,6 @@ router = APIRouter()
 async def scaffold_contract(constructor_args: ContractConstructor, bg_task: BackgroundTasks, contract_srvc: ContractService = Depends(ContractService)):
     # bg_task.add_task(contract_srvc.scaffold, token_name=constructor_args.token_name, token_symbol=constructor_args.token_symbol, metadata_base_uri=constructor_args.base_uri)
     tx = contract_srvc.scaffold(constructor_args.token_name, constructor_args.token_symbol, constructor_args.base_uri)
-    print(tx)
     return {
         'success': True,
         'message': 'contract creation is in progress',

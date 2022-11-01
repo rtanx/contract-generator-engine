@@ -12,6 +12,7 @@ class ContractService:
         account_addr = os.getenv('OWNER_ACCOUNT_ADDRESS')
         if not network.is_connected():
             network.connect(net)
+
         try:
             accounts.at(account_addr)
         except:

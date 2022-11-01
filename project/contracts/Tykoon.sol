@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
 import "chiru-labs/ERC721A@4.2.3/contracts/ERC721A.sol";
 import "OpenZeppelin/openzeppelin-contracts@4.7.3/contracts/access/Ownable.sol";
 
-contract {{contract_name}} is ERC721A, Ownable {
+contract Tykoon is ERC721A, Ownable {
     string private _baseTokenURI;
 
     constructor(

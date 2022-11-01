@@ -60,5 +60,9 @@ class Compiler:
         self._input_data['settings']['remappings'] = paths
 
     def compile(self) -> Contract:
+
         out = solcx.compile_standard(self._input_data, solc_version=self._solc_version, allow_paths=self._allowed_paths)
         return Contract(self._file_name, self._contract_name, out)
+
+    def get_compiler_version(with_commit_hash: bool = True) -> Version:
+        return solcx.get_solc_version(with_commit_hash)

@@ -25,6 +25,23 @@ $ pip3 install -r requirements.txt
 ### Env variables
 make sure the required env variables are defined, you can see the example in `.env.example` file
 
+### If Use Alchemy provider
+```shell
+$ brownie networks set_provider alchemy
+```
+
+### Install Solidity Version
+- check solidity version on contract file
+```shell
+$ from brownie.project.compiler import install_solc("0.8.4")
+```
+
+### Install external library via brownie
+```shell
+$ brownie pm install OpenZeppelin/openzeppelin-contracts@4.7.3
+$ brownie pm install chiru-labs/ERC721A@4.2.3
+```
+
 ### Run the server
 ```shell
 $ python3 server.py

@@ -32,8 +32,9 @@ class ContractService:
         network.disconnect()
         self._project.close()
 
-    def scaffold(self, token_name: str, token_symbol: str, metadata_base_uri: str) -> str:
+    def scaffold(self, token_name: str, token_symbol: str, metadata_base_uri: str, max_supply: int, nft_price_in_idrt: str, idrt_address: str) -> str:
         proj = self._project['Tykoon']
         acc_addr = os.getenv('OWNER_ACCOUNT_ADDRESS')
-        deployed_contract = proj.deploy(token_name, token_symbol, metadata_base_uri, {'from': accounts.at(acc_addr), 'required_confs': 0}, publish_source=True)
+        deployed_contract = proj.deploy(token_name, token_symbol, metadata_base_uri, max_supply, nft_price_in_idrt,
+                                        idrt_address, {'from': accounts.at(acc_addr), 'required_confs': 0}, publish_source=True)
         return deployed_contract.txid
